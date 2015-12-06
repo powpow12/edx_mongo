@@ -8,8 +8,10 @@ exports.insert = function(db, doc, callback) {
   		console.log(error);
   		process.exit(1);
   	}
+  	else {
+  		callback(null);
+  	}
   });
-  callback(null);
 };
 
 /*
@@ -20,21 +22,14 @@ exports.insert = function(db, doc, callback) {
  */
 exports.byDirector = function(db, director, callback) {
   // TODO: implement
-  var criteria = director;
-  var query = {director : criteria};
-  db.collection('movies').find(query).toArray(function(error, docs){
+  var query = {director : director};
+  db.collection('movies').find(query).sort({title : 1}).toArray(function(error, docs){
   	if (error) {
   		console.log(error);
   		process.exit(1);
   	}
-  	console.log("this is error " + error);
-  	console.log(Array.isArray(docs));
-  	console.log(docs.length);
-  	console.log(docs[0].title);
-  	// console.log('Found docs:');
-   //    docs.forEach(function(doc) {
-   //      console.log(JSON.stringify(doc));
-   //  });
-  callback(null, docs);
+  	else {
+   		callback(null, docs);
+   	}
   });
 };
