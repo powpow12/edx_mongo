@@ -3,6 +3,12 @@
  */
 exports.insert = function(db, doc, callback) {
   // TODO: implement
+  db.collection('movies').insert(doc, function(error, results){
+  	if (error) {
+  		console.log(error);
+  		process.exit(1)
+  	}
+  });
   callback(null);
 };
 
